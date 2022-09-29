@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sis/widget/bigtext_1.dart';
+import 'package:sis/Screens/auth/homescreen.dart';
+import 'package:sis/Screens/auth/forgotpassword.dart';
+import 'package:sis/Screens/auth/help.dart';
+import 'package:sis/Screens/auth/about.dart';
+import 'package:sis/widget/launch.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -11,6 +16,26 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void _navigateToHomeScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+  }
+
+  void _navigateToForgotScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const ForgotPassword()));
+  }
+
+  void _navigateToHelpScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const HelpScreen()));
+  }
+
+  void _navigateToAboutScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const About()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +55,18 @@ class _LogInScreenState extends State<LogInScreen> {
                 height: 80,
               ),
               Center(
-                child: Container(
-                  height: 110,
-                  width: 90,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/img/logo/logo.png'),
-                      fit: BoxFit.cover,
+                child: GestureDetector(
+                  child: Container(
+                    height: 110,
+                    width: 90,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/img/logo/logo.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  onTap: () => Launch.launchUrl("https://cmb.ac.lk"),
                 ),
               ),
               const SizedBox(height: 15),
@@ -202,7 +230,9 @@ class _LogInScreenState extends State<LogInScreen> {
                               ),
                             ),
                           ),
-                          onPressed: (() {}),
+                          onPressed: (() {
+                            _navigateToHomeScreen(context);
+                          }),
                           child: const Text(
                             "Sign In",
                             style: TextStyle(
@@ -216,53 +246,68 @@ class _LogInScreenState extends State<LogInScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                            fontSize: 15.0,
+                        GestureDetector(
+                          onTap: () {
+                            _navigateToForgotScreen(context);
+                          },
+                          child: const Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                              fontSize: 15.0,
+                            ),
                           ),
                         ),
                         Row(
                           children: [
-                            RichText(
-                              text: const TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: Icon(
-                                      Icons.info_outline_rounded,
-                                      size: 16,
+                            GestureDetector(
+                              onTap: () {
+                                _navigateToHelpScreen(context);
+                              },
+                              child: RichText(
+                                text: const TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.info_outline_rounded,
+                                        size: 16,
+                                      ),
                                     ),
-                                  ),
-                                  TextSpan(
-                                    text: " Help ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15.0,
+                                    TextSpan(
+                                      text: " Help ",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15.0,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             const SizedBox(
                               width: 10.0,
                             ),
-                            RichText(
-                              text: const TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: Icon(
-                                      Icons.help_outline_outlined,
-                                      size: 16,
+                            GestureDetector(
+                              onTap: () {
+                                _navigateToAboutScreen(context);
+                              },
+                              child: RichText(
+                                text: const TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.help_outline_outlined,
+                                        size: 16,
+                                      ),
                                     ),
-                                  ),
-                                  TextSpan(
-                                    text: " About ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15.0,
+                                    TextSpan(
+                                      text: " About ",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15.0,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ],
